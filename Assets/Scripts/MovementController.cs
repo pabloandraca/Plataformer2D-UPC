@@ -7,14 +7,16 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    public float movementSpeed = 1, jumpForce = 1;
+    public float movementSpeed = 1, jumpForce = 1, groundCheckDistance = 1f;
     public LayerMask castLayer;
 
     private Rigidbody2D rbody;
+    private Animator animator;
 
     private void Start()
     {
         rbody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -27,6 +29,35 @@ public class MovementController : MonoBehaviour
         {
             Jump();
         }
+
+        FacingDirection();
+        PlayAnimations();
+    }
+
+    private void FacingDirection()
+    {
+        float direction = Input.GetAxis("Horizontal");
+
+        if (direction > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (direction < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+    }
+
+    private void PlayAnimations()
+    {
+        if (rbody.velocity.x != 0)
+        {
+            animator.SetBool("isRunning", true);
+        }
+        else
+        {
+            animator.SetBool("isRunning", false);
+        }
     }
 
     private void Jump()
@@ -38,7 +69,7 @@ public class MovementController : MonoBehaviour
 
     private bool CheckForGround()
     {
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector2.down, 0.6f, castLayer);
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector2.down, groundCheckDistance, castLayer);
 
         if (hit.collider != null)
         {
@@ -54,6 +85,6 @@ public class MovementController : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawRay(transform.position, Vector2.down * 0.6f);
+        Gizmos.DrawRay(transform.position, Vector2.down * groundCheckDistance);
     }
 }
