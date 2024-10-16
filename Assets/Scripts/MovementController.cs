@@ -31,7 +31,7 @@ public class MovementController : MonoBehaviour
         }
 
         FacingDirection();
-        PlayAnimations();
+        PlayAnimations(isGrounded);
     }
 
     private void FacingDirection()
@@ -48,8 +48,10 @@ public class MovementController : MonoBehaviour
         }
     }
 
-    private void PlayAnimations()
+    private void PlayAnimations(bool isGrounded)
     {
+        animator.SetBool("isGrounded", isGrounded);
+
         if (rbody.velocity.x != 0)
         {
             animator.SetBool("isRunning", true);
