@@ -10,7 +10,9 @@ public class MovementController : MonoBehaviour
     public float movementSpeed = 1, jumpForce = 1, groundCheckDistance = 1f;
     public LayerMask castLayer;
 
+
     private Rigidbody2D rbody;
+    [SerializeField] private Collider2D playerCollider; 
     private Animator animator;
 
     private void Start()
@@ -25,13 +27,15 @@ public class MovementController : MonoBehaviour
 
         bool isGrounded = CheckForGround();
 
+        animator.SetBool("isGrounded", isGrounded);
+
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             Jump();
         }
 
         FacingDirection();
-        PlayAnimations(isGrounded);
+        PlayAnimations();
     }
 
     private void FacingDirection()
@@ -48,10 +52,8 @@ public class MovementController : MonoBehaviour
         }
     }
 
-    private void PlayAnimations(bool isGrounded)
+    private void PlayAnimations()
     {
-        animator.SetBool("isGrounded", isGrounded);
-
         if (rbody.velocity.x != 0)
         {
             animator.SetBool("isRunning", true);
@@ -66,12 +68,13 @@ public class MovementController : MonoBehaviour
     {
         //El codigo del salto va aqui
         rbody.velocity = new Vector2(rbody.velocity.x, jumpForce);
+        animator.SetTrigger("Jump");
         //rbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
     private bool CheckForGround()
     {
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector2.down, groundCheckDistance, castLayer);
+        RaycastHit2D hit = Physics2D.CircleCast(new Vector2(transform.position.x , transform.position.y - playerCollider.bounds.size.y/2), 0.1f, Vector2.down, groundCheckDistance, castLayer);
 
         if (hit.collider != null)
         {
@@ -87,6 +90,6 @@ public class MovementController : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawRay(transform.position, Vector2.down * groundCheckDistance);
+        Gizmos.DrawRay(new Vector2(transform.position.x , transform.position.y - playerCollider.bounds.size.y/2), Vector2.down * groundCheckDistance);
     }
 }

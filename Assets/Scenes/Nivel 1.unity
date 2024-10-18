@@ -2164,6 +2164,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 233b92ac90318de4e8cc0eb6ed2bbe19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!70 &1614337800 stripped
+CapsuleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 8224818049731977835, guid: 37fb0417cbe2e00408139661adf8628d, type: 3}
+  m_PrefabInstance: {fileID: 3713793512040924729}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1989246726
 GameObject:
   m_ObjectHideFlags: 0
@@ -2244,6 +2249,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1658733156945876021, guid: 37fb0417cbe2e00408139661adf8628d, type: 3}
+      propertyPath: playerCollider
+      value: 
+      objectReference: {fileID: 1614337800}
+    - target: {fileID: 1658733156945876021, guid: 37fb0417cbe2e00408139661adf8628d, type: 3}
+      propertyPath: groundCheckDistance
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2570751889783742793, guid: 37fb0417cbe2e00408139661adf8628d, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2290,6 +2303,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5696087508025519870, guid: 37fb0417cbe2e00408139661adf8628d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8224818049731977835, guid: 37fb0417cbe2e00408139661adf8628d, type: 3}
+      propertyPath: m_Size.y
+      value: 3.5244765
+      objectReference: {fileID: 0}
+    - target: {fileID: 8224818049731977835, guid: 37fb0417cbe2e00408139661adf8628d, type: 3}
+      propertyPath: m_Offset.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
