@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using TMPro;
 using UnityEngine.SceneManagement;
 
-public class ZonaDeMuerte : MonoBehaviour
+public class ZonaDeVictoria : MonoBehaviour
 {
     public GameObject uiFinal;
     public TextMeshProUGUI saludo;
@@ -13,7 +13,7 @@ public class ZonaDeMuerte : MonoBehaviour
     {
         if (objQueEntroAlTrigger.gameObject.CompareTag("Player"))
         {
-            saludo.text = "PERDISTE!";
+            saludo.text = "ALCANSASTE LA META! FELICIDADES!";
             uiFinal.SetActive(true);
         }
     }
